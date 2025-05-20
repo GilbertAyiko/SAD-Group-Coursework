@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyambogo Hostel Allocation - Login</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* Kyambogo blue */
+            --secondary-color: #E31937;
+            --accent-color: #FFC72C;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .logo img {
+            height: 80px;
+        }
+
+        .login-form h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .user-type {
+            display: flex;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .user-type-btn {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background-color: white;
+            border: none;
+        }
+
+        .user-type-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .test-credentials {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .test-credentials h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>Kyambogo University</h1>
+            <p>Hostel Allocation System</p>
+        </div>
+
+        <div class="login-form">
+            <h2>Login to Your Account</h2>
+            
+            <div class="user-type">
+                <button class="user-type-btn active" id="studentBtn">Student</button>
+                <button class="user-type-btn" id="adminBtn">Administrator</button>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username" id="usernameLabel">Registration Number</label>
+                    <input type="text" id="username" required placeholder="Enter your registration number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="Enter your password">
+                </div>
+                
+                <button type="submit">Login</button>
+            </form>
+
+            
+
+            <div class="footer">
+                <p>© 2025 Kyambogo University. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between student and admin login
+        const studentBtn = document.getElementById('studentBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        const usernameLabel = document.getElementById('usernameLabel');
+        
+        studentBtn.addEventListener('click', () => {
+            studentBtn.classList.add('active');
+            adminBtn.classList.remove('active');
+            usernameLabel.textContent = 'Registration Number';
+            document.getElementById('username').placeholder = 'Enter your registration number';
+        });
+        
+        adminBtn.addEventListener('click', () => {
+            adminBtn.classList.add('active');
+            studentBtn.classList.remove('active');
+            usernameLabel.textContent = 'Username';
+            document.getElementById('username').placeholder = 'Enter admin username';
+        });
+
+        // Login validation
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const isAdmin = adminBtn.classList.contains('active');
+            
+            // Test credentials
+            const validStudent = username === 'Reg2025' && password === 'student123';
+            const validAdmin = username === 'admin' && password === 'admin123';
+            
+            if ((isAdmin && validAdmin) || (!isAdmin && validStudent)) {
+                alert('Login successful! Redirecting...');
+                // In a real app, this would redirect to the appropriate dashboard
+                if (isAdmin) {
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    window.location.href = 'student-dashboard.html';
+                }
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+
+// In the login form submit handler
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const isAdmin = adminBtn.classList.contains('active');
+    
+    // Test credentials
+    const validStudent = username === 'reg2023' && password === 'student123';
+    const validAdmin = username === 'admin' && password === 'admin123';
+    
+    if ((isAdmin && validAdmin) || (!isAdmin && validStudent)) {
+        if (isAdmin) {
+            window.location.href = 'admin-dashboard.html';
+        } else {
+            // Store student data in sessionStorage
+            sessionStorage.setItem('studentData', JSON.stringify({
+                name: "John Doe",
+                regNumber: username,
+                gender: "",
+                isPWD: false
+            }));
+            window.location.href = 'student-dashboard.html';
+        }
+    } else {
+        alert('Invalid credentials. Please try again.');
+    }
+});
+// In the login form submit handler
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const isAdmin = adminBtn.classList.contains('active');
+    
+    // Test credentials
+    const validStudent = username === 'reg2023' && password === 'student123';
+    const validAdmin = username === 'admin' && password === 'admin123';
+    
+    if ((isAdmin && validAdmin) || (!isAdmin && validStudent)) {
+        if (isAdmin) {
+            // Store admin data in sessionStorage
+            sessionStorage.setItem('adminData', JSON.stringify({
+                name: "Admin User",
+                role: "Administrator"
+            }));
+            window.location.href = 'admin-dashboard.html';
+        } else {
+            window.location.href = 'student-dashboard.html';
+        }
+    } else {
+        alert('Invalid credentials. Please try again.');
+    }
+});
+    </script>
+</body>
+</html>

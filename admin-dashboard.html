@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Kyambogo Hostel</title>
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <div class="header-left">
+                <h1>Kyambogo University Hostel</h1>
+                <p>Administrator Portal</p>
+            </div>
+            <div class="header-right">
+                <span id="adminName">Admin User</span>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </header>
+
+        <nav class="admin-nav">
+            <ul>
+                <li class="active" data-tab="roomManagement">Room Management</li>
+                <li data-tab="allocationSystem">Allocation System</li>
+                <li data-tab="reporting">Reporting</li>
+            </ul>
+        </nav>
+
+        <main class="admin-main">
+            <!-- Room Management Tab -->
+            <div class="tab-content active" id="roomManagementTab">
+                <div class="section-header">
+                    <h2>Room Inventory</h2>
+                    <button id="addHostelBtn">+ Add New Hostel</button>
+                </div>
+                
+                <div class="search-filter">
+                    <input type="text" id="hostelSearch" placeholder="Search hostels...">
+                    <select id="hostelFilter">
+                        <option value="all">All Hostels</option>
+                        <option value="male">Male Hostels</option>
+                        <option value="female">Female Hostels</option>
+                        <option value="pwd">PWD Accessible</option>
+                    </select>
+                </div>
+                
+                <div class="hostel-table-container">
+                    <table class="hostel-table">
+                        <thead>
+                            <tr>
+                                <th>Hostel Name</th>
+                                <th>Gender</th>
+                                <th>PWD Access</th>
+                                <th>Capacity</th>
+                                <th>Occupied</th>
+                                <th>Available</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hostelTableBody">
+                            <!-- Hostel data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Allocation System Tab -->
+            <div class="tab-content" id="allocationSystemTab">
+                <h2>Student Applications</h2>
+                
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label>Gender:</label>
+                        <select id="filterGender">
+                            <option value="all">All</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Year of Study:</label>
+                        <select id="filterYear">
+                            <option value="all">All</option>
+                            <option value="1">First Year</option>
+                            <option value="2">Second Year</option>
+                            <option value="3">Third Year</option>
+                            <option value="4">Final Year</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>PWD Status:</label>
+                        <select id="filterPWD">
+                            <option value="all">All</option>
+                            <option value="yes">PWD Only</option>
+                            <option value="no">Non-PWD Only</option>
+                        </select>
+                    </div>
+                    
+                    <button id="applyFiltersBtn">Apply Filters</button>
+                    <button id="autoAllocateBtn">Auto Allocate</button>
+                </div>
+                
+                <div class="applications-table-container">
+                    <table class="applications-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Year</th>
+                                <th>PWD</th>
+                                <th>Preferred Hostel</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsTableBody">
+                            <!-- Applications will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reporting Tab -->
+            <div class="tab-content" id="reportingTab">
+                <h2>Reports</h2>
+                
+                <div class="report-controls">
+                    <button id="occupancyReportBtn">Occupancy Report</button>
+                    <button id="pendingReportBtn">Pending Applications</button>
+                    <button id="pwdReportBtn">PWD Allocations</button>
+                    <button id="exportReportBtn">Export to Excel</button>
+                </div>
+                
+                <div class="report-display" id="reportDisplay">
+                    <p>Select a report to generate</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Add Hostel Modal -->
+        <div id="hostelModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 id="modalTitle">Add New Hostel</h2>
+                <form id="hostelForm">
+                    <input type="hidden" id="hostelId">
+                    
+                    <div class="form-group">
+                        <label for="hostelName">Hostel Name:</label>
+                        <input type="text" id="hostelName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Gender:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="hostelGender" value="Male" required> Male</label>
+                            <label><input type="radio" name="hostelGender" value="Female"> Female</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hostelCapacity">Capacity:</label>
+                        <input type="number" id="hostelCapacity" min="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hostelPWD">PWD Accessible:</label>
+                        <select id="hostelPWD" required>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit">Save</button>
+                        <button type="button" class="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer class="admin-footer">
+            <p>© 2025 Kyambogo University - Hostel Management System</p>
+        </footer>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

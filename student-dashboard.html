@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Kyambogo Hostel</title>
+    <link rel="stylesheet" href="student-styles.css">
+</head>
+<body>
+    <div class="student-container">
+        <header class="student-header">
+            <div class="header-left">
+                <h1>Kyambogo University Hostel</h1>
+                <p>Student Portal</p>
+            </div>
+            <div class="header-right">
+                <span id="studentName">Loading...</span>
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </header>
+
+        <nav class="student-nav">
+            <ul>
+                <li class="active" data-tab="apply">Apply for Hostel</li>
+                <li data-tab="status">Allocation Status</li>
+                <li data-tab="payment">Payment History</li>
+            </ul>
+        </nav>
+
+        <main class="student-main">
+            <!-- Application Tab -->
+            <div class="tab-content active" id="applyTab">
+                <h2>Hostel Application</h2>
+                <form id="hostelApplication">
+                    <div class="form-group">
+                        <label>Gender:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="Male" required> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwdStatus">Person with Disability (PWD):</label>
+                        <select id="pwdStatus" required>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div id="pwdNeedsGroup" class="form-group hidden">
+                        <label for="pwdNeeds">Special Requirements:</label>
+                        <textarea id="pwdNeeds" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hostelSelect">Preferred Hostel:</label>
+                        <select id="hostelSelect" required disabled>
+                            <option value="">-- Select your gender first --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roomPref">Room Preference:</label>
+                        <select id="roomPref">
+                            <option value="any">Any</option>
+                            <option value="single">Single Room</option>
+                            <option value="shared">Shared Room</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Submit Application</button>
+                </form>
+            </div>
+
+            <!-- Status Tab -->
+            <div class="tab-content" id="statusTab">
+                <h2>Allocation Status</h2>
+                <div class="status-card">
+                    <div class="status-header">
+                        <h3>Current Allocation</h3>
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                    <div class="status-details">
+                        <p>Your application is under review</p>
+                        <p>Submitted on: <span id="appDate">Not available</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Tab -->
+            <div class="tab-content" id="paymentTab">
+                <h2>Payment History</h2>
+                <table class="payment-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Payment For</th>
+                            <th>Status</th>
+                            <th>Receipt</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentHistory">
+                        <tr>
+                            <td colspan="5">No payment records found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer class="student-footer">
+            <p>© 2025 Kyambogo University - Hostel Management System</p>
+        </footer>
+    </div>
+
+    <script src="student-script.js"></script>
+</body>
+</html>
