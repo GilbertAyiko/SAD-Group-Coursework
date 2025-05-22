@@ -7,8 +7,8 @@ const sampleHostels = [
 ];
 
 const sampleStudents = [
-    { id: "2023/001", name: "John Doe", gender: "Male", isPWD: false, program: "Computer Science", year: 3 },
-    { id: "2023/002", name: "Jane Smith", gender: "Female", isPWD: true, program: "Education", year: 4 }
+    { id: "2023/001", name: "Ayikobua Gilbert", gender: "Male", isPWD: false, program: "Computer Science", year: 2 },
+    { id: "2023/002", name: "Rachel Rubangakene", gender: "Female", isPWD: true, program: "Education", year: 2 }
 ];
 
 const sampleAllocations = [];
