@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Get student data from session (in real app, this would come from backend)
     const studentData = {
-        name: "Ayikobua Gilbert",
+        name: "Student",
         regNumber: "reg2023",
         gender: "",
         isPWD: false,
@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateHostelOptions(gender) {
         // In real app, this would fetch from API
         const hostels = {
-            Male: ["North Hall", "East Hall", "University Hall"],
-            Female: ["South Hall", "West Hall", "Mary Stuart Hall"]
+            Male: ["Bavana Hall", "Sports Pro", "University Hall"],
+            Female: ["Madonna Hall", "Good Sheperd", "Mary Stuart Hall"]
         };
         
         hostelSelect.innerHTML = '';
